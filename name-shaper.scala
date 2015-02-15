@@ -20,9 +20,13 @@ object Main {
     convMap(key) = value
   }
 
+  def getConvertedLine(line: String): String  = {
+      return for (c <- line) yield convMap.getOrElse(c, c)
+  }
+
   def main(args: Array[String]) = {
     for (line <- Source.stdin.getLines) {
-      val newLine = for (c <- line) yield convMap.getOrElse(c, c)
+      val newLine = getConvertedLine(line)
       println(newLine)
     }
   }
